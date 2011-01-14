@@ -41,17 +41,16 @@ class MainController extends BaseController
         $namespace = array_shift($dirs);
         
         // building to the proper path
-        switch($namespace)
+        $bundleDirs = $this->get('kernel')->getBundleDirs();
+        if(array_key_exists($namespace, $bundleDirs))
         {
-            case "Application":
-            case "Bundle":
-                $bundle = array_shift($dirs);
-                $root_dir = $this->container->get('kernel')->getRootDir() . '/../src/' .$namespace . '/' . $bundle . '/Resources/public/';
-                break;
+            $bundle   = array_shift($dirs);
+            $root_dir = $bundleDirs[$namespace] . '/' . $bundle . '/Resources/public/';
+        }
                 
-            default:
-                $root_dir = $this->container->get('kernel')->getRootDir() . '/../web/' . $namespace . '/';
-                break;
+        else
+        {
+           $root_dir = $this->container->get('kernel')->getRootDir() . '/../web/' . $namespace . '/';
         }
         
         $path = $root_dir . implode('/', $dirs) . '.' . $ext;

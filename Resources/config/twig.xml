@@ -5,13 +5,23 @@
     xsi:schemaLocation="http://www.symfony-project.org/schema/dic/services http://www.symfony-project.org/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="css.twig.extension.class">Bundle\CSSBundle\Twig\CSSExtension</parameter>
+        <parameter key="css.twig.extension.css.class">Bundle\CSSBundle\Twig\CSSExtension</parameter>
+        
+        <parameter key="css.twig.tokenparser.border_radius.class">Bundle\CSSBundle\Twig\CSS3\BorderRadius\TokenParser</parameter>
+        <parameter key="css.twig.tokenparser.box_shadow.class">Bundle\CSSBundle\Twig\CSS3\BoxShadow\TokenParser</parameter>
+        <parameter key="css.twig.extension.css3.tokenparsers" type="collection">
+            <parameter>%css.twig.tokenparser.border_radius.class%</parameter>
+            <parameter>%css.twig.tokenparser.box_shadow.class%</parameter>
+        </parameter>
     </parameters>
 
     <services>
-        <service id="css.twig.extension" class="%css.twig.extension.class%">
+        <service id="css.twig.extension.stylesheets" class="%css.twig.extension.css.class%">
             <tag name="twig.extension" />
             <argument type="service" id="service_container" />
         </service>
+        
+        <service id="css.twig.tokenparser.border_radius"  class="%css.twig.tokenparser.border_radius.class%" />
+        <service id="css.twig.tokenparser.box_shadow"     class="%css.twig.tokenparser.box_shadow.class%" />
     </services>
 </container>

@@ -2,13 +2,11 @@
 
 namespace Bundle\CSSBundle\Twig\StyleSheet;
 
-use Bundle\CSSBundle\Twig\StyleSheet\Node;
-
 class TokenParser extends \Twig_TokenParser
 {
     /**
      * @param 	\Twig_Token  $token
-     * @return	\Bundle\CSSBundle\Twig\StyleSheetNode
+     * @return	\Bundle\CSSBundle\Twig\StyleSheet\Node
      */
     public function parse(\Twig_Token $token)
     {

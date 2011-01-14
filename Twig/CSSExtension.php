@@ -15,18 +15,36 @@ class CSSExtension extends \Twig_Extension
 		 */
     public function __construct($container)
     {
-        $this->container   = $container;
+        $this->container = $container;
     }
     
     public function getTokenParsers()
     {
-        return array(
+        $stylesheets = array(
             // {% stylesheet "/path/to/css/file" %}
             new StyleSheet\TokenParser(),
             
             // {% stylesheets %}
             new StyleSheets\TokenParser(),
         );
+        
+        $css3TokenParser = array();
+        foreach($this->container->getParameter('css.twig.extension.css3.tokenparsers') as $tokenParser)
+        {
+          $css3TokenParser[] = new $tokenParser();
+        }
+        
+        return array_merge($stylesheets, $css3TokenParser);
+    }
+    
+    public function renderAttribute($type, $value)
+    {
+        if(!$this->container->has('css.twig.tokenparser.' . $type))
+        {
+            throw new \RuntimeException('The CSS attribute "' . $type . '" has no attached service');
+        }
+        
+        return $this->container->get('css.twig.tokenparser.' . $type)->render($value);
     }
     
     public function addFile($file)
