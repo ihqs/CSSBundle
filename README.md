@@ -13,20 +13,20 @@ It will
 
 ## Installation
 
- git submodule add git://github.com/ihqs/CSSBundle.git src/vendor/CSSBundle
- git submodule update --init
+  git submodule add git://github.com/ihqs/CSSBundle.git src/vendor/CSSBundle
+  git submodule update --init
 
 Then add the module to the Kernel : in the registerBundles method add
 
- new Bundle\CSSBundle\CSSBundle()
+  new Bundle\CSSBundle\CSSBundle()
  
 Then, declare the module in your application's configuration file. In YML you'll do
  
- css.config: ~
+  css.config: ~
  
 The next and last step will be to add the bundle's routes to your routing configuration. In a routing.yml file, you'll write
 
- css:
+  css:
     resource: CSSBundle/Resources/config/routing/main.xml
     prefix: /css
  

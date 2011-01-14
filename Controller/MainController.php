@@ -5,7 +5,6 @@ namespace Bundle\CSSBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
 use Symfony\Component\Templating\Storage\FileStorage as Storage;
 
-define('DS', DIRECTORY_SEPARATOR);
 
 class MainController extends BaseController
 {
@@ -53,6 +52,7 @@ class MainController extends BaseController
            $root_dir = $this->container->get('kernel')->getRootDir() . '/../web/' . $namespace . '/';
         }
         
+        // returning realpath or throw everything to the trashcan
         $path = $root_dir . implode('/', $dirs) . '.' . $ext;
         $realpath = realpath($path);
         
