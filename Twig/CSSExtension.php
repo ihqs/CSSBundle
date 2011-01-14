@@ -22,10 +22,10 @@ class CSSExtension extends \Twig_Extension
     {
         return array(
             // {% stylesheet "/path/to/css/file" %}
-            new StyleSheetTokenParser(),
+            new StyleSheet\TokenParser(),
             
             // {% stylesheets %}
-            new StyleSheetsTokenParser(),
+            new StyleSheets\TokenParser(),
         );
     }
     

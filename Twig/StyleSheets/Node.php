@@ -1,8 +1,8 @@
 <?php
 
-namespace Bundle\CSSBundle\Twig;
+namespace Bundle\CSSBundle\Twig\StyleSheets;
 
-class StyleSheetsNode extends \Twig_Node
+class Node extends \Twig_Node
 {
     /**
      * @param 	integer 							$lineno

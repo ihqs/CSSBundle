@@ -1,10 +1,10 @@
 <?php
 
-namespace Bundle\CSSBundle\Twig;
+namespace Bundle\CSSBundle\Twig\StyleSheets;
 
-use Bundle\CSSBundle\Twig\StyleSheetsNode;
+use Bundle\CSSBundle\Twig\StyleSheets\Node;
 
-class StyleSheetsTokenParser extends \Twig_TokenParser
+class TokenParser extends \Twig_TokenParser
 {
     /**
      * @param 	\Twig_Token  $token
@@ -16,7 +16,7 @@ class StyleSheetsTokenParser extends \Twig_TokenParser
         $stream = $this->parser->getStream();
         $stream->expect(\Twig_Token::BLOCK_END_TYPE);
 
-        return new StyleSheetsNode($lineno, $this->getTag());
+        return new Node($lineno, $this->getTag());
     }
 
     /**

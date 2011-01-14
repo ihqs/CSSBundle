@@ -1,8 +1,8 @@
 <?php
 
-namespace Bundle\CSSBundle\Twig;
+namespace Bundle\CSSBundle\Twig\StyleSheet;
 
-class StyleSheetNode extends \Twig_Node
+class Node extends \Twig_Node
 {
     /**
      * @param 	\Twig_NodeInterface 	$value
