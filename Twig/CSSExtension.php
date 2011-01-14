@@ -48,9 +48,22 @@ class CSSExtension extends \Twig_Extension
         }
         
         $links = array();
-        foreach($this->container->get('css_files') as $stylesheet)
+        if($this->container->get('kernel')->getEnvironment() == 'dev')
         {
-           $links[] = '<link type="text/css" rel="stylesheet" href="' . $stylesheet . '" />';
+            foreach($this->container->get('css_files') as $stylesheet)
+            {
+                $stylesheet = trim(str_replace('\\', '_', $stylesheet));
+                $stylesheet = trim(str_replace('/', '_', $stylesheet));
+                $stylesheet = trim(str_replace('.', '__', $stylesheet));
+                if(empty($stylesheet)) { continue; }
+                
+                $links[] = '<link type="text/css" rel="stylesheet" href="' . $this->container->get('router')->generate('css_file', array('file' => $stylesheet)) . '" />';
+            }
+        }
+        
+        else
+        {
+            $links[] = '<link type="text/css" rel="stylesheet" href="' . $this->container->get('router')->generate('css_all') . '" />';
         }
         
         return implode("\n", $links);
